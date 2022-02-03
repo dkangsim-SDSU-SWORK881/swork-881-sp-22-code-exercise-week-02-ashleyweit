@@ -1,7 +1,7 @@
 ---
 title: "SWORK 881 week02"
-author: "your name goes here "
-date: "MM/DD/YYYY"
+author: Ashley Weitensteiner
+date: "01/28/2022"
 output: html_document
 ---
 
@@ -10,34 +10,63 @@ output: html_document
 
 ```
 
+```{r}
+library(tidyverse)
+library(tidymodels)
+```
+
 
 # Data
 ```{r}
 # load data
 give_your_data_name_here<- read_csv("")
 
+datacc<-read_csv("Data/LHS_exercise_01272022.csv")
+
 #how many observations and variables? 
 
 ```
 #how many observations and variables? 
-[provide your answer here]
+# 268 observations and 8 variables
 
 
 ```{r}
 # create a new variable called `depression` by summing all ptsd variables. Use tidy approach
 
-
+dataccD<-datacc%>%
+  mutate(depression= rowSums(across(ptsd1_1:ptsd4_1), na.rm = TRUE))
 ```
 
 
 ```{r}
 #run simple descriptive statistics for all variables
-
-
+mean(dataccD$age)
+sd(dataccD$age)
+mean(dataccD$depression)
+sd(dataccD$depression)
+ftable(dataccD$sex)
+ftable(dataccD$education)
 ```
+#Age 
+32.11 (12.48)
+mean(sd)
+
+#depression 
+mean score of 8.97, standard deviation of 4.39
+
+#Sex
+0 - female = (n = 164/268 = 61.12%)
+1 - male = (n = 104/268 = 38.81%)
+
+#Education
+1- less than high school = (n = 18/268 = 06.72%)
+2 - graduated high school = (n = 91/268 = 33.96%)
+3 - some college = (n = 86/268 = 32.09%)
+4 - graduated college = (n = 73/268 = 27.24%)
+
 
 DESCRIBE THE DATA BRIEFLY HERE
-[provide your answer here]
+Of the sample of 268 participants, 61.12% were female. The mean age of the particpant was 32 years old. Nearly all particpants (95.28%) graduated high school and 27.24% had completed college. The mean depression score was 8.97.
 
 
 
@@ -48,7 +77,7 @@ Create a linear regression model that answers the question above. Print the resu
 
 ```{r}
 # lm
-
+fit.1 <- lm(depression ~ age, )
 ```
 
 
