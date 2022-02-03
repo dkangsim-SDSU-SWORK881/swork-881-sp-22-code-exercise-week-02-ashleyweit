@@ -77,24 +77,28 @@ Create a linear regression model that answers the question above. Print the resu
 
 ```{r}
 # lm
-fit.1 <- lm(depression ~ age, )
-```
+#age
+fit.1 <- lm(depression ~ age+factor(education)+factor(sex), data = dataccD)
+summary(fit.1)
 
+```
 
 ```{r}
-# model diagnostics
-
-
+par(mfrow=c(2,2))
+plot(fit.1)
 ```
-
 
 ```{r}
 # use ggplot to plot histogram of residuals (use 20 bins)
 
-
+ggplot(fit.1,
+       aes(fit.1$residuals))+
+  geom_histogram(bins = 20)
 ```
 
 # Discussion of Results
 
-Describe and interpret your results, including any statistical information you believe important: 
+Describe and interpret your results, including any statistical information you believe important:
+# the histogram shows that the data is heavy-tailed, thus the condition to meet normality is not met. This is also reflected in the normal qq plot, in which the residuals deviate from the line in the bottom tail and some in the top tail. 
 
+#of the dependent variables(sex, education, and age) that we tested, only age demonstrated a significant relationship with depression. Age and depression score were negatively associated.
